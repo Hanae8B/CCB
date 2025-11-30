@@ -44,9 +44,9 @@ CCB/
 
 1. Clone the repository:
 
-```bash
+bash
 git clone https://github.com/Hanae8B/CCB.git
-cd CCB```
+cd CCB
 
 2. Create a virtual environment (recommended):
 python -m venv venv
