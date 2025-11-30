@@ -56,6 +56,7 @@ venv\Scripts\activate      # Windows
 3. Install dependencies:
 pip install -r requirements.txt
 
+---
 ## 🏃 Running the CCB
 
 python main.py
@@ -64,6 +65,7 @@ run_ccb.bat
 
 The system will process your messages and output structured context including intent, emotion, subtext, state, and conversation summaries.
 
+---
 ## 🛠 Usage Example
 
 You: Hello, how are you?
@@ -74,10 +76,12 @@ Key insights:
 - Dominant intent appears to be 'greeting'.
 - Prevailing emotion is 'neutral'.
 
+---
 ## 📄 License
 
 This project is licensed under the GNU General Public License (GPL). See the LICENSE file for details.
 
+---
 ## 📫 Author
 
 Anna Baniakina
