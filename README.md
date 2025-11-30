@@ -60,7 +60,7 @@ pip install -r requirements.txt
 ## 🏃 Running the CCB
 
 python main.py
-# or, on Windows
+or, on Windows
 run_ccb.bat
 
 The system will process your messages and output structured context including intent, emotion, subtext, state, and conversation summaries.
