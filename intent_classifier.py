@@ -5,16 +5,28 @@ import re
 
 class IntentClassifier:
     """
-    Bare-minimum, deterministic intent classifier using keyword/regex matching.
-    Designed to be fast, predictable, and dependency-free.
+    Deterministic intent classifier using keyword/regex matching.
+    Fast, predictable, and dependency-free.
+
+    Recognizes:
+    - standard conversation intents
+    - emotional states
+    - exclamatory statements
     """
 
     DEFAULT_INTENTS = {
         "greeting": [r"\bhi\b", r"\bhello\b", r"\bhey\b"],
         "goodbye": [r"\bbye\b", r"\bfarewell\b", r"\bsee you\b"],
         "help_request": [r"\bhelp\b", r"\bsupport\b", r"\bassistance\b"],
-        "question": [r"\bwho\b", r"\bwhat\b", r"\bwhen\b", r"\bwhere\b", r"\bwhy\b", r"\bhow\b", r"\?$"],
+        # Refined question patterns: only actual questions
+        "question": [r".*\?$"],  # ends with a question mark
         "feedback": [r"\blike\b", r"\blove\b", r"\bhate\b", r"\bfeedback\b"],
+        "instruction": [r"\bplease\b", r"\bcan you\b", r"\bcalculate\b", r"\badd\b", r"\bsubtract\b"],
+        "request": [r"\bcan you\b", r"\bwould you\b", r"\bplease\b"],
+        # Emotional states
+        "emotional_state": [r"\bi am\b", r"\bi feel\b", r"\bI’m\b", r"\bI am exhausted\b", r"\bI am tired\b", r"\bI feel sad\b"],
+        # New intent for exclamatory statements
+        "exclamation": [r".*!{1,}"],  # sentences ending with one or more exclamation marks
     }
 
     def __init__(self, intent_patterns: Optional[Dict[str, List[str]]] = None):
@@ -27,7 +39,7 @@ class IntentClassifier:
     def classify(self, text: str) -> str:
         """
         Returns the best-matching intent label or 'unknown' if no match.
-        Simple priority is the order of dict keys.
+        Priority is based on the order of dict keys.
         """
         if not text or not text.strip():
             return "unknown"

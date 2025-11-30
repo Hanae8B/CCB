@@ -2,21 +2,21 @@
 import tkinter as tk
 from context_manager import ContextManager
 from chain_builder import ChainBuilder
-from schema import InferenceInput, InferenceOutput
+from schema import InferenceOutput
 
 
 class CCBApp:
     def __init__(self, root):
         self.cm = ContextManager(chain_builder=ChainBuilder())
         self.root = root
-        self.root.title("Conversational Context Builder")
+        self.root.title("Conversational Context Builder (CCB)")
 
         # Conversation display
-        self.text_area = tk.Text(root, wrap="word", height=20, width=70, state="disabled")
+        self.text_area = tk.Text(root, wrap="word", height=20, width=80, state="disabled")
         self.text_area.pack(padx=10, pady=10)
 
         # User input
-        self.entry = tk.Entry(root, width=55)
+        self.entry = tk.Entry(root, width=60)
         self.entry.pack(side="left", padx=10, pady=10)
         self.entry.bind("<Return>", self.send_message)
 
@@ -44,7 +44,7 @@ class CCBApp:
         response_text = (
             f"Intent: {context.intent} | "
             f"Emotion: {context.emotion} | "
-            f"Subtext: {', '.join(context.subtext_tags) if context.subtext_tags else 'none'} | "
+            f"Subtext: {', '.join(context.subtext_tags) if context.subtext_tags else 'none'}\n"
             f"Summary: {context.summary or 'n/a'}\n"
         )
 
@@ -64,7 +64,9 @@ class CCBApp:
             self.text_area.insert(tk.END, "No previous conversation found.\n")
         else:
             for msg in self.cm.memory.messages:
-                self.text_area.insert(tk.END, f"{msg['sender'].capitalize()}: {msg['text']}\n")
+                sender = msg.get("sender", "Unknown").capitalize()
+                text = msg.get("text", "")
+                self.text_area.insert(tk.END, f"{sender}: {text}\n")
         self.text_area.config(state="disabled")
 
     def _append_text(self, text):
