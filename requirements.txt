@@ -1,1 +1,23 @@
-tkinter
+# Core Python libraries (standard, but listed for clarity if packaging)
+tkinter          # GUI framework (bundled with Python, but include for clarity)
+logging          # Logging utilities
+json             # JSON serialization/deserialization
+os               # File and path utilities
+re               # Regular expressions
+dataclasses      # For structured data classes (Python 3.7+ has built-in)
+
+# Third-party libraries (recommended for robustness)
+regex            # Enhanced regex engine (optional, improves performance over re)
+numpy            # Numerical operations (useful for scoring, future ML extensions)
+pandas           # Data handling (summarization, exporting conversation logs)
+scikit-learn     # For advanced intent/emotion classification if extended
+nltk             # Natural Language Toolkit (lexicon, tokenization, sentiment)
+spacy            # Industrial-strength NLP (optional, for richer intent/emotion parsing)
+
+# GUI enhancements
+ttkthemes        # Optional: themes for Tkinter
+Pillow           # Image handling (if GUI needs icons or avatars)
+
+# Persistence & storage
+sqlalchemy       # Optional: if moving beyond JSON to database storage
+tinydb           # Lightweight JSON-based database alternative
